@@ -73,21 +73,33 @@ public class AlsaMixerSshRemote extends AsyncTask<Object, Object, List<MixerCont
             session.connect();
 
             ChannelExec channel = (ChannelExec) session.openChannel("exec");
+            channel.setInputStream(null);
+
             try {
                 channel.setCommand(cmd);
                 channel.run();
 
                 Log.d("SSH", "Commande exécutée");
 
-                String result = inputStreamToString(channel.getInputStream(), "UTF-8");
-                Log.d("SSH", "Résultat de la commande ssh: " + result);
-                return result;
+                InputStream inputStream = channel.getInputStream();
+                channel.connect();
+                // String result = inputStreamToString(channel.getInputStream(),
+                // "UTF-8");
+                // Log.d("SSH", "Résultat de la commande ssh: " + result);
+                return inputStreamToString(inputStream, "UTF-8");
             } finally {
-                if (channel != null) Log.e("SSH", inputStreamToString(channel.getErrStream(), "UTF-8"));
 
-                session.disconnect();
+                try {
 
+                    // Log.e("SSH", inputStreamToString(channel.getErrStream(),
+                    // "UTF-8"));
+                    channel.disconnect();
+
+                } finally {
+                    session.disconnect();
+                }
             }
+
         } catch (JSchException e) {
             Log.e("SSH", e.getMessage(), e);
             throw new IOException(e.getMessage());

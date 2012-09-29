@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import android.util.Log;
+
 /**
  * Parser pour le résultat de la commande "amixer -i contents"
  * 
@@ -48,19 +50,27 @@ public class AmixerParser {
      */
     private List<MixerControl> convertEntriesToMixerControl(List<String> entries) {
         Pattern pattern = Pattern
-                .compile("numid=\\d+,iface=/*,name='(.+)' ?; ?type=(.+),access=rw------,values=(.*) : values=(.*)");
+                .compile("numid=\\d+,iface=.*,name='(.+)' *; ?type=(.+),access=.*,values=(\\d*).*: values=(.*)");
 
         List<MixerControl> mixerControls = new ArrayList<MixerControl>(entries.size());
         for (String entry : entries) {
+            Log.d("AmixerParser", "Parsing de la ligne: " + entry);
             Matcher result = pattern.matcher(entry);
+            if (!result.find()) continue;
+
             String name = result.group(1);
             String type = result.group(2);
+            int nbCanaux = Integer.parseInt(result.group(3));
             String value = result.group(4);
 
             if ("INTEGER".equals(type)) {
+                if (nbCanaux > 1) {
+                    value = value.split(",")[0];
+                }
                 mixerControls.add(new MixerControl(name, value));
             }
         }
-        return null;
+        Log.d("AmixerParser", "Mixers: " + mixerControls.toString());
+        return mixerControls;
     }
 }
