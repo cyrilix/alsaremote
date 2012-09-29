@@ -1,0 +1,141 @@
+numid=38,iface=MIXER,name='Master Playback Switch'
+  ; type=BOOLEAN,access=rw------,values=1
+  : values=on
+numid=37,iface=MIXER,name='Master Playback Volume'
+  ; type=INTEGER,access=rw---R--,values=1,min=0,max=42,step=0
+  : values=38
+  | dBscale-min=-63.00dB,step=1.50dB,mute=0
+numid=12,iface=MIXER,name='Headphone Playback Switch'
+  ; type=BOOLEAN,access=rw------,values=2
+  : values=on,on
+numid=11,iface=MIXER,name='Headphone Playback Volume'
+  ; type=INTEGER,access=rw---R--,values=2,min=0,max=42,step=0
+  : values=42,42
+  | dBscale-min=-63.00dB,step=1.50dB,mute=0
+numid=10,iface=MIXER,name='PCM Playback Switch'
+  ; type=BOOLEAN,access=rw------,values=2
+  : values=on,on
+numid=9,iface=MIXER,name='PCM Playback Volume'
+  ; type=INTEGER,access=rw---R--,values=2,min=0,max=31,step=0
+  : values=26,26
+  | dBscale-min=-34.50dB,step=1.50dB,mute=0
+numid=28,iface=MIXER,name='Front Mic Boost Volume'
+  ; type=INTEGER,access=rw---R--,values=2,min=0,max=3,step=0
+  : values=0,0
+  | dBscale-min=0.00dB,step=10.25dB,mute=0
+numid=22,iface=MIXER,name='Front Mic Playback Switch'
+  ; type=BOOLEAN,access=rw------,values=2
+  : values=off,off
+numid=21,iface=MIXER,name='Front Mic Playback Volume'
+  ; type=INTEGER,access=rw---R--,values=2,min=0,max=31,step=0
+  : values=21,21
+  | dBscale-min=-34.50dB,step=1.50dB,mute=0
+numid=2,iface=MIXER,name='Front Playback Switch'
+  ; type=BOOLEAN,access=rw------,values=2
+  : values=on,on
+numid=1,iface=MIXER,name='Front Playback Volume'
+  ; type=INTEGER,access=rw---R--,values=2,min=0,max=42,step=0
+  : values=38,38
+  | dBscale-min=-63.00dB,step=1.50dB,mute=0
+numid=4,iface=MIXER,name='Surround Playback Switch'
+  ; type=BOOLEAN,access=rw------,values=2
+  : values=on,on
+numid=3,iface=MIXER,name='Surround Playback Volume'
+  ; type=INTEGER,access=rw---R--,values=2,min=0,max=42,step=0
+  : values=42,42
+  | dBscale-min=-63.00dB,step=1.50dB,mute=0
+numid=6,iface=MIXER,name='Center Playback Switch'
+  ; type=BOOLEAN,access=rw------,values=1
+  : values=on
+numid=5,iface=MIXER,name='Center Playback Volume'
+  ; type=INTEGER,access=rw---R--,values=1,min=0,max=42,step=0
+  : values=42
+  | dBscale-min=-63.00dB,step=1.50dB,mute=0
+numid=8,iface=MIXER,name='LFE Playback Switch'
+  ; type=BOOLEAN,access=rw------,values=1
+  : values=on
+numid=7,iface=MIXER,name='LFE Playback Volume'
+  ; type=INTEGER,access=rw---R--,values=1,min=0,max=42,step=0
+  : values=42
+  | dBscale-min=-63.00dB,step=1.50dB,mute=0
+numid=24,iface=MIXER,name='Line Playback Switch'
+  ; type=BOOLEAN,access=rw------,values=2
+  : values=off,off
+numid=23,iface=MIXER,name='Line Playback Volume'
+  ; type=INTEGER,access=rw---R--,values=2,min=0,max=31,step=0
+  : values=21,21
+  | dBscale-min=-34.50dB,step=1.50dB,mute=0
+numid=26,iface=MIXER,name='CD Playback Switch'
+  ; type=BOOLEAN,access=rw------,values=2
+  : values=off,off
+numid=25,iface=MIXER,name='CD Playback Volume'
+  ; type=INTEGER,access=rw---R--,values=2,min=0,max=31,step=0
+  : values=23,23
+  | dBscale-min=-34.50dB,step=1.50dB,mute=0
+numid=15,iface=MIXER,name='Capture Switch'
+  ; type=BOOLEAN,access=rw------,values=2
+  : values=on,on
+numid=17,iface=MIXER,name='Capture Switch',index=1
+  ; type=BOOLEAN,access=rw------,values=2
+  : values=on,on
+numid=14,iface=MIXER,name='Capture Volume'
+  ; type=INTEGER,access=rw---R--,values=2,min=0,max=31,step=0
+  : values=19,19
+  | dBscale-min=-16.50dB,step=1.50dB,mute=0
+numid=16,iface=MIXER,name='Capture Volume',index=1
+  ; type=INTEGER,access=rw---R--,values=2,min=0,max=31,step=0
+  : values=0,0
+  | dBscale-min=-16.50dB,step=1.50dB,mute=0
+numid=13,iface=MIXER,name='Loopback Mixing'
+  ; type=ENUMERATED,access=rw------,values=1,items=2
+  ; Item #0 'Disabled'
+  ; Item #1 'Enabled'
+  : values=1
+numid=36,iface=MIXER,name='IEC958 Default PCM Playback Switch'
+  ; type=BOOLEAN,access=rw------,values=1
+  : values=off
+numid=32,iface=MIXER,name='IEC958 Playback Con Mask'
+  ; type=IEC958,access=r-------,values=1
+  : values=[AES0=0x0f AES1=0xff AES2=0x00 AES3=0x00]
+numid=33,iface=MIXER,name='IEC958 Playback Pro Mask'
+  ; type=IEC958,access=r-------,values=1
+  : values=[AES0=0x0f AES1=0x00 AES2=0x00 AES3=0x00]
+numid=34,iface=MIXER,name='IEC958 Playback Default'
+  ; type=IEC958,access=rw------,values=1
+  : values=[AES0=0x04 AES1=0x00 AES2=0x00 AES3=0x00]
+numid=35,iface=MIXER,name='IEC958 Playback Switch'
+  ; type=BOOLEAN,access=rw------,values=1
+  : values=off
+numid=31,iface=MIXER,name='Dynamic Power-Control'
+  ; type=ENUMERATED,access=rw------,values=1,items=2
+  ; Item #0 'Disabled'
+  ; Item #1 'Enabled'
+  : values=0
+numid=29,iface=MIXER,name='Independent HP'
+  ; type=ENUMERATED,access=rw------,values=1,items=2
+  ; Item #0 'OFF'
+  ; Item #1 'ON'
+  : values=1
+numid=18,iface=MIXER,name='Input Source'
+  ; type=ENUMERATED,access=rw------,values=1,items=5
+  ; Item #0 'Rear Mic'
+  ; Item #1 'Front Mic'
+  ; Item #2 'Line'
+  ; Item #3 'CD'
+  ; Item #4 'Stereo Mixer'
+  : values=1
+numid=27,iface=MIXER,name='Rear Mic Boost Volume'
+  ; type=INTEGER,access=rw---R--,values=2,min=0,max=3,step=0
+  : values=0,0
+  | dBscale-min=0.00dB,step=10.25dB,mute=0
+numid=20,iface=MIXER,name='Rear Mic Playback Switch'
+  ; type=BOOLEAN,access=rw------,values=2
+  : values=off,off
+numid=19,iface=MIXER,name='Rear Mic Playback Volume'
+  ; type=INTEGER,access=rw---R--,values=2,min=0,max=31,step=0
+  : values=0,0
+  | dBscale-min=-34.50dB,step=1.50dB,mute=0
+numid=30,iface=MIXER,name='Smart 5.1'
+  ; type=BOOLEAN,access=rw------,values=1
+  : values=off
+  
