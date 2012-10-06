@@ -20,8 +20,8 @@ public class AlsaMixerMock {
      * @see fr.cyrilix.alsaremote.mixer.AlsaMixer#getControles()
      */
     public List<MixerControl> getControles() {
-        return Arrays.asList(new MixerControl("Master", "50"), new MixerControl("Front", "75"), new MixerControl(
-                "Rear", "25"));
+        return Arrays.asList(new MixerControl("Master", "50", "100"), new MixerControl("Front", "75", "100"),
+                new MixerControl("Rear", "25", "100"));
     }
 
     /**

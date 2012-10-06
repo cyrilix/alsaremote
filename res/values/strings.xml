@@ -1,8 +1,19 @@
 <resources>
 
     <string name="app_name">Alsaremote</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_control">Alsa Mixer</string>
     <string name="menu_settings">Settings</string>
-    <string name="title_activity_control">ControlActivity</string>
-
+    
+    <string name="pref_user">User</string>
+    <string name="pref_user_summary">Ssh login</string>
+    
+    <string name="pref_mdp">Password</string>
+    <string name="pref_mdp_summary">Login password</string>
+    
+    <string name="pref_hostname">Server</string>
+    <string name="pref_hostname_summary">IP adresse IP or hostname</string>
+    
+    <string name="pref_port">Port</string>
+    <string name="pref_port_summary">Ssh port</string>
+    <string name="pref_privateKey_passphrase">Passphrase SSH</string>
 </resources>

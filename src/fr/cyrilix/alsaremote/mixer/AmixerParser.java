@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -24,6 +25,7 @@ public class AmixerParser {
     public AmixerParser() {}
 
     public List<MixerControl> parse(String response) throws IOException {
+        if (response == null) return Collections.emptyList();
 
         BufferedReader reader = new BufferedReader(new StringReader(response));
 
@@ -50,7 +52,7 @@ public class AmixerParser {
      */
     private List<MixerControl> convertEntriesToMixerControl(List<String> entries) {
         Pattern pattern = Pattern
-                .compile("numid=\\d+,iface=.*,name='(.+)' *; ?type=(.+),access=.*,values=(\\d*).*: values=(.*)");
+                .compile("numid=\\d+,iface=.*,name='(.+)' *; ?type=(.+),access=.*,values=(\\d*).*max=(\\d+).*: values=(\\d*).*");
 
         List<MixerControl> mixerControls = new ArrayList<MixerControl>(entries.size());
         for (String entry : entries) {
@@ -61,13 +63,14 @@ public class AmixerParser {
             String name = result.group(1);
             String type = result.group(2);
             int nbCanaux = Integer.parseInt(result.group(3));
-            String value = result.group(4);
+            String maxValue = result.group(4);
+            String value = result.group(5);
 
             if ("INTEGER".equals(type)) {
                 if (nbCanaux > 1) {
                     value = value.split(",")[0];
                 }
-                mixerControls.add(new MixerControl(name, value));
+                mixerControls.add(new MixerControl(name, value, maxValue));
             }
         }
         Log.d("AmixerParser", "Mixers: " + mixerControls.toString());

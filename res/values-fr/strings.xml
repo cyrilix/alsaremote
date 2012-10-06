@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="preference">Préférences</string>
+    <string name="menu_settings">Préférences</string>
+
+    <string name="sound_mixer">Mixer Son</string>
+    
+    <string name="pref_categorie_ssh">Serveur SSH</string>
+    
+    <string name="pref_user">Utilisateur</string>
+    <string name="pref_user_summary">Login de connexion ssh</string>
+    
+    <string name="pref_mdp">Mot de passe</string>
+    <string name="pref_mdp_summary">Mot de passe de connexion ssh</string>
+    
+    <string name="pref_hostname">Serveur</string>
+    <string name="pref_hostname_summary">Adresse IP ou nom du serveur</string>
+    
+    <string name="pref_port">Port</string>
+    <string name="pref_port_summary">Port de connexion ssh</string>
+    <string name="pref_private_key">Clé privée</string>
+    <string name="pref_privateKey_summary">Chemin de la clé privée utilisée pour se connecter</string>
+</resources>

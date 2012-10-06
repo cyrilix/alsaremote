@@ -12,10 +12,41 @@ public class MixerControl {
 
     private String value = "0";
 
+    private String maxValue = "100";
+
     /**
      * Constructeur par défaut
      */
     public MixerControl() {}
+
+    /**
+     * @param name
+     * @param value
+     */
+    public MixerControl(String name, String value, String maxValue) {
+        super();
+        this.name = name;
+        this.value = value;
+        this.maxValue = maxValue;
+    }
+
+    /**
+     * Renvoie la valeur maximale autorisée sur le contrôle
+     * 
+     * @return la valeur maximale autorisée sur le contrôle
+     */
+    public String getMaxValue() {
+        return this.maxValue;
+    }
+
+    /**
+     * Définit la valeur maximale autorisée sur le contrôle
+     * 
+     * @param maxValue la valeur maximale autorisée sur le contrôle
+     */
+    public void setMaxValue(String maxValue) {
+        this.maxValue = maxValue;
+    }
 
     /**
      * Renvoie le name
@@ -50,12 +81,6 @@ public class MixerControl {
      * @param value value
      */
     public void setValue(String value) {
-        this.value = value;
-    }
-
-    public MixerControl(String name, String value) {
-        super();
-        this.name = name;
         this.value = value;
     }
 

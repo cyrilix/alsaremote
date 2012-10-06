@@ -11,6 +11,6 @@ public interface AlsaMixer {
 
     List<MixerControl> getControles() throws IOException;
 
-    void updateControle(MixerControl mixerControl) throws IOException;
+    void updateControle(String mixerName, int value) throws IOException;
 
 }
