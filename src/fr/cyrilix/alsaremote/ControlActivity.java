@@ -96,8 +96,9 @@ public class ControlActivity extends Activity {
             for (MixerControl mixer : alsaMixer.getControles()) {
                 LinearLayout mixerLayout = new LinearLayout(this);
                 mixerLayout.setOrientation(LinearLayout.VERTICAL);
-                mixerLayout.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT));
+                mixerLayout.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
                 mixerLayout.setVisibility(View.VISIBLE);
+                mixerLayout.setPadding(0, 20, 0, 20);
 
                 TextView mixerName = new TextView(this);
                 mixerName.setText(mixer.getName());
@@ -106,16 +107,17 @@ public class ControlActivity extends Activity {
                 SeekBar seekBar = new SeekBar(this);
                 seekBar.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
                 seekBar.setOnSeekBarChangeListener(onSeekBarChangeListener);
-                seekBar.setRotation(270f);
+                // seekBar.setRotation(270f);
                 seekBar.setProgress(Integer.valueOf(mixer.getValue()));
                 seekBar.setMax(Integer.parseInt(mixer.getMaxValue()));
                 seekBar.setVisibility(View.VISIBLE);
+                seekBar.setContentDescription(mixer.getName());
 
                 mixerLayout.addView(seekBar);
                 mixerLayout.addView(mixerName);
 
                 mixersLayout.addView(mixerLayout);
-
+                // mixersLayout.addView(seekBar);
             }
 
         } catch (IOException e) {

@@ -16,4 +16,6 @@
     <string name="pref_port">Port</string>
     <string name="pref_port_summary">Ssh port</string>
     <string name="pref_privateKey_passphrase">Passphrase SSH</string>
+    <string name="pref_privateKey_passphrase_summary">SSh private passphrase</string>
+    <string name="pref_privateKey_summary">SSh private key path</string>
 </resources>
