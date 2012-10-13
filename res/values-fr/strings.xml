@@ -20,4 +20,5 @@
     <string name="pref_port_summary">Port de connexion ssh</string>
     <string name="pref_private_key">Clé privée</string>
     <string name="pref_privateKey_summary">Chemin de la clé privée utilisée pour se connecter</string>
+    <string name="radio">Radio</string>
 </resources>
