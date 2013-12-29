@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="preference">Préférences</string>
+    <string name="app_name">Alsaremote</string>
+    <string name="title_activity_control">Alsa Mixer</string>
     <string name="menu_settings">Préférences</string>
 
     <string name="sound_mixer">Mixer Son</string>
@@ -19,6 +20,9 @@
     <string name="pref_port">Port</string>
     <string name="pref_port_summary">Port de connexion ssh</string>
     <string name="pref_private_key">Clé privée</string>
+    <string name="pref_privateKey_passphrase">Mot de passe de la clé SSH</string>
+    <string name="pref_privateKey_passphrase_summary">SSh private passphrase</string>
     <string name="pref_privateKey_summary">Chemin de la clé privée utilisée pour se connecter</string>
     <string name="radio">Radio</string>
+    <string name="title_activity_radio">RadioActivity</string>
 </resources>

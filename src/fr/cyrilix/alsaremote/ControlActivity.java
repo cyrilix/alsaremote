@@ -49,19 +49,7 @@ public class ControlActivity extends AbstractMainActivity {
          *      int, boolean)
          */
         @Override
-        public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-            // if (!fromUser) return;
-            //
-            // Log.d(INPUT_METHOD_SERVICE, "Modification du volume: " +
-            // progress);
-            // TextView label = (TextView) ((LinearLayout)
-            // seekBar.getParent()).getChildAt(1);
-            // try {
-            // alsaMixer.updateControle(label.getText().toString(), progress);
-            // } catch (IOException e) {
-            // Log.e("ControlActivity", e.getMessage(), e);
-            // }
-        }
+        public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {}
     };
 
     /**

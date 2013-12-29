@@ -40,10 +40,6 @@ public abstract class AbstractMainActivity extends Activity {
                 intent.setClass(this, ControlActivity.class);
                 startActivityForResult(intent, 0);
                 break;
-            case R.id.radio:
-                intent.setClass(this, RadioActivity.class);
-                startActivityForResult(intent, 0);
-                break;
             case R.id.menu_settings:
                 intent.setClass(this, SetPreferenceActivity.class);
                 startActivityForResult(intent, 0);
