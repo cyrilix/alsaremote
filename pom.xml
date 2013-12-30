@@ -106,7 +106,7 @@
 				</executions>
 				<configuration>
 					<sdk>
-						<platform>18</platform>
+						<platform>19</platform>
 					</sdk>
 					<lint>
 						<skip>false</skip>

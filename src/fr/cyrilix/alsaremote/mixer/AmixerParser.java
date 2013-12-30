@@ -6,6 +6,7 @@ import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -36,7 +37,7 @@ public class AmixerParser {
         List<String> entries = new ArrayList<String>();
         while ((line = reader.readLine()) != null) {
 
-            if (line.toLowerCase().startsWith("numid")) {
+            if (line.toLowerCase(Locale.US).startsWith("numid")) {
                 if (currentLine != null) entries.add(currentLine.toString());
                 currentLine = new StringBuilder();
             }

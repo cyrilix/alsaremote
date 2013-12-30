@@ -1,4 +1,4 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@android:id/tabcontent"
     android:layout_width="match_parent"
@@ -17,8 +17,8 @@
             android:layout_height="wrap_content"
             android:contentDescription="@string/sound_mixer"
             android:orientation="vertical"
-            android:paddingBottom="10mm"
-            android:paddingTop="10mm"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
             android:paddingLeft="50dp"
             android:paddingRight="50dp"
             android:scrollbarAlwaysDrawVerticalTrack="true" >
@@ -39,4 +39,4 @@
         android:layout_height="match_parent" >
     </LinearLayout>
 
-</FrameLayout>
+</merge>
