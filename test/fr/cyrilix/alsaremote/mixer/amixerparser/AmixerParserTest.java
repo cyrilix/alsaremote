@@ -8,56 +8,64 @@ import java.io.InputStreamReader;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import fr.cyrilix.alsaremote.mixer.AmixerParser;
 
 /**
- * Test de la classe {@link AmixerParser}
+ * Test class {@link AmixerParser}
  * 
  * @author Cyrille Nofficial
  * 
  */
 public class AmixerParserTest {
-    // private final static private final static Log LOGGER =
-    // LogFactory.getLog(AmixerParserTest.class);
+    private final static Logger LOGGER = LoggerFactory.getLogger(AmixerParserTest.class);
 
     private String amixerContent;
 
     /**
-     * Constructeur par défaut
+     * Default constructor
      */
     public AmixerParserTest() {}
 
+    /**
+     * Prepare test data
+     * 
+     * @throws IOException
+     */
     @Before
     public void setUp() throws IOException {
-        BufferedReader contentReader = new BufferedReader(new InputStreamReader(new FileInputStream("amixer.txt"),
-                "UTF-8"));
+        BufferedReader contentReader = new BufferedReader(new InputStreamReader(
+                new FileInputStream("./test/amixer.txt"), "UTF-8"));
+        try {
+            StringBuilder content = new StringBuilder();
+            String line = null;
+            while ((line = contentReader.readLine()) != null)
+                content.append(line).append('\n');
 
-        StringBuilder content = new StringBuilder();
-        String line = null;
-        while ((line = contentReader.readLine()) != null)
-            content.append(line).append('\n');
-
-        amixerContent = content.toString();
+            amixerContent = content.toString();
+        } finally {
+            contentReader.close();
+        }
     }
 
     /**
-     * Test de la méthode {@link AmixerParser#parse(String)}
+     * Test method {@link AmixerParser#parse(String)}
      */
     @Test
     public void testParse() {
         try {
-            System.out.println("------ testParse -------");
+            LOGGER.info("------ testParse -------");
 
             AmixerParser instance = new AmixerParser();
             instance.parse(amixerContent);
 
-            System.out.print(instance.parse(amixerContent));
+            LOGGER.info(instance.parse(amixerContent).toString());
 
         } catch (Exception e) {
-            System.err.println("Erreur imprévue: " + e.getMessage());
-            e.printStackTrace();
-            Assert.fail("Erreur imprévue: " + e.getMessage());
+            LOGGER.error("Unexpected error: {}", e.getMessage(), e);
+            Assert.fail("Unexpected error:: " + e.getMessage());
         }
     }
 }

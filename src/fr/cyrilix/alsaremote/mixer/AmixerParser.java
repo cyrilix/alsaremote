@@ -9,7 +9,8 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import android.util.Log;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Parser pour le résultat de la commande "amixer -i contents"
@@ -18,6 +19,7 @@ import android.util.Log;
  * 
  */
 public class AmixerParser {
+    private static final Logger LOGGER = LoggerFactory.getLogger(AmixerParser.class);
 
     /**
      * Constructeur par défaut
@@ -56,7 +58,7 @@ public class AmixerParser {
 
         List<MixerControl> mixerControls = new ArrayList<MixerControl>(entries.size());
         for (String entry : entries) {
-            Log.d("AmixerParser", "Parsing de la ligne: " + entry);
+            LOGGER.debug("AmixerParser", "Parsing de la ligne: {}", entry);
             Matcher result = pattern.matcher(entry);
             if (!result.find()) continue;
 
@@ -73,7 +75,7 @@ public class AmixerParser {
                 mixerControls.add(new MixerControl(name, value, maxValue));
             }
         }
-        Log.d("AmixerParser", "Mixers: " + mixerControls.toString());
+        LOGGER.debug("AmixerParser", "Mixers: {}", mixerControls);
         return mixerControls;
     }
 }
