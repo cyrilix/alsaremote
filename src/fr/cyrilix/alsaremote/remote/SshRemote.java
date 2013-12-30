@@ -2,6 +2,7 @@ package fr.cyrilix.alsaremote.remote;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -9,6 +10,7 @@ import java.io.InputStreamReader;
 
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.os.Environment;
 import android.util.Log;
 
 import com.jcraft.jsch.ChannelExec;
@@ -63,7 +65,10 @@ public class SshRemote extends AsyncTask<String, Object, String> {
 
         try {
 
-            jsch.addIdentity(sharedPreferences.getString("privateKey", ""), sharedPreferences.getString("privateKeyPassphrase",""));
+            jsch.addIdentity(
+                    Environment.getExternalStorageDirectory() + File.separator
+                            + sharedPreferences.getString("privateKey", ""),
+                    sharedPreferences.getString("privateKeyPassphrase", ""));
             session = jsch.getSession(sharedPreferences.getString("user", ""),
                     sharedPreferences.getString("hostname", ""), 22);
 
