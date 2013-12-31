@@ -44,7 +44,6 @@ public class MixerActivity extends Activity {
                 LOGGER.error(e.getMessage(), e);
                 AlertMessage alertMessage = new AlertMessage(getApplicationContext());
                 alertMessage.displayError(e);
-
             }
         }
 
