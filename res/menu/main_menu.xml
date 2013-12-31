@@ -5,12 +5,6 @@
         android:orderInCategory="50"
         android:showAsAction="ifRoom|withText" />
     
-    <item android:id="@+id/radio"
-        android:title="@string/radio"
-        android:orderInCategory="50"
-        android:showAsAction="ifRoom|withText" />
-    
-    
     <item android:id="@+id/menu_settings"
         android:title="@string/menu_settings"
         android:orderInCategory="100"

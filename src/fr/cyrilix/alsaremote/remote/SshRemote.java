@@ -1,9 +1,7 @@
 package fr.cyrilix.alsaremote.remote;
 
 import java.io.BufferedReader;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -17,8 +15,10 @@ import com.jcraft.jsch.ChannelExec;
 import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.JSchException;
 
+import fr.cyrilix.alsaremote.SetPreferenceActivity;
+
 /**
- * Mixer alsa distant basé sur ssh
+ * Interface to run command over ssh
  * 
  * @author Cyrille Nofficial
  * 
@@ -27,6 +27,12 @@ public class SshRemote extends AsyncTask<String, Object, String> {
 
     private final SharedPreferences sharedPreferences;
 
+    /**
+     * SSH logger
+     * 
+     * @author Cyrille Nofficial
+     * 
+     */
     public static class Logger implements com.jcraft.jsch.Logger {
 
         /**
@@ -47,7 +53,7 @@ public class SshRemote extends AsyncTask<String, Object, String> {
     }
 
     /**
-     * Constructeur par défaut
+     * Constructor
      * 
      * @param sharedPreferences
      */
@@ -64,17 +70,14 @@ public class SshRemote extends AsyncTask<String, Object, String> {
         JSch.setConfig("StrictHostKeyChecking", "no");
 
         try {
-
             jsch.addIdentity(
                     Environment.getExternalStorageDirectory() + File.separator
-                            + sharedPreferences.getString("privateKey", ""),
-                    sharedPreferences.getString("privateKeyPassphrase", ""));
-            session = jsch.getSession(sharedPreferences.getString("user", ""),
-                    sharedPreferences.getString("hostname", ""), 22);
-
-            // } else {
-            session.setPassword(sharedPreferences.getString("mdp", ""));
-            // }
+                            + sharedPreferences.getString(SetPreferenceActivity.PRIVATE_KEY, ""),
+                    sharedPreferences.getString(SetPreferenceActivity.PRIVATE_KEY_PASSPHRASE, ""));
+            session = jsch.getSession(sharedPreferences.getString(SetPreferenceActivity.USER, ""),
+                    sharedPreferences.getString(SetPreferenceActivity.HOSTNAME, ""),
+                    Integer.parseInt(sharedPreferences.getString(SetPreferenceActivity.PORT, "22")));
+            session.setPassword(sharedPreferences.getString(SetPreferenceActivity.PASSWORD, ""));
 
             session.connect();
 
@@ -89,16 +92,10 @@ public class SshRemote extends AsyncTask<String, Object, String> {
 
                 InputStream inputStream = channel.getInputStream();
                 channel.connect();
-                // String result = inputStreamToString(channel.getInputStream(),
-                // "UTF-8");
-                // Log.d("SSH", "Résultat de la commande ssh: " + result);
                 return inputStreamToString(inputStream, "UTF-8");
             } finally {
 
                 try {
-
-                    // Log.e("SSH", inputStreamToString(channel.getErrStream(),
-                    // "UTF-8"));
                     channel.disconnect();
 
                 } finally {
@@ -111,22 +108,6 @@ public class SshRemote extends AsyncTask<String, Object, String> {
             throw new IOException(e.getMessage());
 
         }
-    }
-
-    /**
-     * @param string
-     * @return
-     * @throws IOException
-     */
-    private byte[] loadPrivateKey(String string) throws IOException {
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        InputStream keyFile = new FileInputStream(string);
-        int bite = -1;
-        while ((bite = keyFile.read()) != -1)
-            byteArrayOutputStream.write(bite);
-
-        keyFile.close();
-        return byteArrayOutputStream.toByteArray();
     }
 
     private String inputStreamToString(InputStream inputStream, String encoding) throws IOException {

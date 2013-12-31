@@ -1,31 +1,42 @@
 package fr.cyrilix.alsaremote;
 
-import java.io.IOException;
-
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
+import fr.cyrilix.alsaremote.mixer.MixerActivity;
 
 /**
  * @author Cyrille Nofficial
  * 
  */
-public abstract class AbstractMainActivity extends Activity {
+public class MainActivity extends Activity {
 
     /**
      * Constructeur par défaut
      */
-    protected AbstractMainActivity() {}
+    public MainActivity() {}
 
     /**
      * @see android.app.Activity#onCreateOptionsMenu(android.view.Menu)
      */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.activity_control, menu);
-        return true;
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    /**
+     * @see android.app.Activity#onCreate(android.os.Bundle)
+     */
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        setContentView(R.layout.activity_control);
     }
 
     /**
@@ -37,9 +48,10 @@ public abstract class AbstractMainActivity extends Activity {
         Intent intent = new Intent();
         switch (item.getItemId()) {
             case R.id.mixer:
-                intent.setClass(this, ControlActivity.class);
+                intent.setClass(this, MixerActivity.class);
                 startActivityForResult(intent, 0);
                 break;
+
             case R.id.menu_settings:
                 intent.setClass(this, SetPreferenceActivity.class);
                 startActivityForResult(intent, 0);
@@ -49,13 +61,4 @@ public abstract class AbstractMainActivity extends Activity {
         return true;
     }
 
-    /**
-     * @param e
-     */
-    public void displayError(IOException e) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
-        builder.setMessage(e.getLocalizedMessage());
-        builder.setTitle("Connexion");
-        builder.create();
-    }
 }

@@ -1,7 +1,7 @@
 package fr.cyrilix.alsaremote.mixer;
 
 /**
- * Contrôle d'un mixer alsa
+ * Control of alsa mixer
  * 
  * @author Cyrille Nofficial
  * 
@@ -15,13 +15,16 @@ public class MixerControl {
     private String maxValue = "100";
 
     /**
-     * Constructeur par défaut
+     * Constructor
      */
     public MixerControl() {}
 
     /**
-     * @param name
-     * @param value
+     * Constructor
+     * 
+     * @param name control name
+     * @param value current value
+     * @param maxValue value
      */
     public MixerControl(String name, String value, String maxValue) {
         super();
@@ -31,54 +34,54 @@ public class MixerControl {
     }
 
     /**
-     * Renvoie la valeur maximale autorisée sur le contrôle
+     * Return maximum value for the control
      * 
-     * @return la valeur maximale autorisée sur le contrôle
+     * @return maximum value for the control
      */
     public String getMaxValue() {
         return this.maxValue;
     }
 
     /**
-     * Définit la valeur maximale autorisée sur le contrôle
+     * Define maximum value for the control
      * 
-     * @param maxValue la valeur maximale autorisée sur le contrôle
+     * @param maxValue maximum value for the control
      */
     public void setMaxValue(String maxValue) {
         this.maxValue = maxValue;
     }
 
     /**
-     * Renvoie le name
+     * Return name of the control
      * 
-     * @return le name
+     * @return name of the control
      */
     public String getName() {
         return this.name;
     }
 
     /**
-     * Définit le name
+     * Define name of the control
      * 
-     * @param name name
+     * @param name name of the control
      */
     public void setName(String name) {
         this.name = name;
     }
 
     /**
-     * Renvoie le value
+     * Return current value
      * 
-     * @return le value
+     * @return current value
      */
     public String getValue() {
         return this.value;
     }
 
     /**
-     * Définit le value
+     * Define current value
      * 
-     * @param value value
+     * @param value current value
      */
     public void setValue(String value) {
         this.value = value;

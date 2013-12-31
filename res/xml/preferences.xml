@@ -1,39 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
 
-    <PreferenceCategory android:title="@string/pref_categorie_ssh" >
+    <PreferenceCategory android:title="@string/pref_categorie_ssh" android:persistent="true">
         <EditTextPreference
             android:defaultValue="login"
             android:key="user"
             android:summary="@string/pref_user_summary"
-            android:title="@string/pref_user" />
+            android:title="@string/pref_user" android:persistent="true"/>
         <EditTextPreference
             android:defaultValue=""
             android:key="mdp"
             android:password="true"
             android:summary="@string/pref_mdp_summary"
-            android:title="@string/pref_mdp" />
+            android:title="@string/pref_mdp" android:persistent="true"/>
         <EditTextPreference
-            android:defaultValue="/sdcard/.ssh/id_rsa"
+            android:defaultValue="id_rsa"
             android:key="privateKey"
             android:summary="@string/pref_privateKey_summary"
-            android:title="@string/pref_private_key" />
+            android:title="@string/pref_private_key" android:persistent="true"/>
         <EditTextPreference
             android:defaultValue=""
             android:key="privateKeyPassphrase"
             android:password="true"
             android:summary="@string/pref_privateKey_passphrase_summary"
-            android:title="@string/pref_privateKey_passphrase" />
+            android:title="@string/pref_privateKey_passphrase" android:persistent="true"/>
         <EditTextPreference
             android:defaultValue=""
             android:key="hostname"
             android:summary="@string/pref_hostname_summary"
-            android:title="@string/pref_hostname" />
+            android:title="@string/pref_hostname" android:persistent="true"/>
         <EditTextPreference
             android:defaultValue="22"
             android:key="port"
             android:summary="@string/pref_port_summary"
-            android:title="@string/pref_port" />
+            android:title="@string/pref_port" android:persistent="true"/>
     </PreferenceCategory>
 
 </PreferenceScreen>

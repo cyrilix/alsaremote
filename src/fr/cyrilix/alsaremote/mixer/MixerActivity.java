@@ -1,7 +1,8 @@
-package fr.cyrilix.alsaremote;
+package fr.cyrilix.alsaremote.mixer;
 
 import java.io.IOException;
 
+import android.app.Activity;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -13,11 +14,16 @@ import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
-import fr.cyrilix.alsaremote.mixer.AlsaMixer;
-import fr.cyrilix.alsaremote.mixer.AlsaMixerSshRemote;
-import fr.cyrilix.alsaremote.mixer.MixerControl;
+import fr.cyrilix.alsaremote.AlertMessage;
+import fr.cyrilix.alsaremote.R;
 
-public class ControlActivity extends AbstractMainActivity {
+/**
+ * Activity that manage sound cursors
+ * 
+ * @author Cyrille Nofficial
+ * 
+ */
+public class MixerActivity extends Activity {
 
     private AlsaMixer alsaMixer;
 
@@ -34,7 +40,9 @@ public class ControlActivity extends AbstractMainActivity {
                 alsaMixer.updateControle(label.getText().toString(), seekBar.getProgress());
             } catch (IOException e) {
                 Log.e("ControlActivity", e.getMessage(), e);
-                displayError(e);
+                AlertMessage alertMessage = new AlertMessage(getApplicationContext());
+                alertMessage.displayError(e);
+
             }
         }
 
@@ -60,14 +68,14 @@ public class ControlActivity extends AbstractMainActivity {
         super.onCreate(savedInstanceState);
 
         alsaMixer = new AlsaMixerSshRemote(getApplicationContext());
-        setContentView(R.layout.activity_control);
-
+        setContentView(R.layout.activity_mixer);
+        getActionBar().setDisplayHomeAsUpEnabled(true);
         loadMixer();
 
     }
 
     /**
-     * 
+     * Load layout mixer
      */
     public void loadMixer() {
         ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -91,22 +99,21 @@ public class ControlActivity extends AbstractMainActivity {
                 SeekBar seekBar = new SeekBar(this);
                 seekBar.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
                 seekBar.setOnSeekBarChangeListener(onSeekBarChangeListener);
-                // seekBar.setRotation(270f);
                 seekBar.setProgress(Integer.valueOf(mixer.getValue()));
                 seekBar.setMax(Integer.parseInt(mixer.getMaxValue()));
                 seekBar.setVisibility(View.VISIBLE);
                 seekBar.setContentDescription(mixer.getName());
-
                 mixerLayout.addView(seekBar);
                 mixerLayout.addView(mixerName);
 
                 mixersLayout.addView(mixerLayout);
-                // mixersLayout.addView(seekBar);
             }
+            mixersLayout.refreshDrawableState();
 
         } catch (IOException e) {
             Log.e("ControlActivity", e.getMessage(), e);
-            displayError(e);
+            AlertMessage alertMessage = new AlertMessage(getApplicationContext());
+            alertMessage.displayError(e);
         }
     }
 
@@ -118,4 +125,5 @@ public class ControlActivity extends AbstractMainActivity {
         super.onRestart();
         loadMixer();
     }
+
 }
