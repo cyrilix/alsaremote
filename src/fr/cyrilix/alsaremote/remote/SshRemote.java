@@ -6,6 +6,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+import org.slf4j.LoggerFactory;
+import org.slf4j.MarkerFactory;
+
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Environment;
@@ -16,6 +19,7 @@ import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.JSchException;
 
 import fr.cyrilix.alsaremote.SetPreferenceActivity;
+import fr.cyrilix.alsaremote.tools.AsyncTaskResult;
 
 /**
  * Interface to run command over ssh
@@ -23,8 +27,8 @@ import fr.cyrilix.alsaremote.SetPreferenceActivity;
  * @author Cyrille Nofficial
  * 
  */
-public class SshRemote extends AsyncTask<String, Object, String> {
-
+public class SshRemote extends AsyncTask<String, Object, AsyncTaskResult<String>> {
+    private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(SshRemote.class);
     private final SharedPreferences sharedPreferences;
 
     /**
@@ -129,12 +133,12 @@ public class SshRemote extends AsyncTask<String, Object, String> {
      * @see android.os.AsyncTask#doInBackground(String[])
      */
     @Override
-    protected String doInBackground(String... params) {
+    protected AsyncTaskResult<String> doInBackground(String... params) {
         try {
-            return runCmd(params[0]);
+            return new AsyncTaskResult<String>(runCmd(params[0]));
         } catch (Exception e) {
-            Log.e("SSH", e.getMessage(), e);
-            return "";
+            LOGGER.error(MarkerFactory.getMarker("SSH"), e.getMessage(), e);
+            return new AsyncTaskResult<String>(e);
         }
     }
 }

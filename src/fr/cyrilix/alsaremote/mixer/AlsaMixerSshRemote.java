@@ -10,6 +10,7 @@ import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import fr.cyrilix.alsaremote.remote.SshRemote;
+import fr.cyrilix.alsaremote.tools.AsyncTaskResult;
 
 /**
  * Mixer alsa distant basé sur ssh
@@ -21,14 +22,14 @@ public class AlsaMixerSshRemote implements AlsaMixer {
 
     private final AmixerParser amixerParser = new AmixerParser();
     private final SharedPreferences preferences;
-    private final Context context;
 
     /**
-     * Constructeur par défaut
+     * Constructor
+     * 
+     * @param context
      */
     public AlsaMixerSshRemote(Context context) {
         super();
-        this.context = context;
         preferences = PreferenceManager.getDefaultSharedPreferences(context);
     }
 
@@ -39,15 +40,9 @@ public class AlsaMixerSshRemote implements AlsaMixer {
      */
     @Override
     public List<MixerControl> getControles() throws IOException {
-        AsyncTask<String, Object, String> sshRemote = new SshRemote(preferences);
-        AsyncTask<String, Object, String> task = sshRemote.execute("amixer contents");
-        try {
-            return amixerParser.parse(task.get(3, TimeUnit.SECONDS));
-        } catch (Exception e) {
-            Log.e("AlsaMixer", e.getMessage(), e);
-            throw new IOException(e.getMessage(), e);
 
-        }
+        String cmd = "amixer contents";
+        return amixerParser.parse(runCommand(cmd));
     }
 
     /**
@@ -56,15 +51,27 @@ public class AlsaMixerSshRemote implements AlsaMixer {
      */
     @Override
     public void updateControle(String mixerName, int value) throws IOException {
-        AsyncTask<String, Object, String> sshRemote = new SshRemote(preferences);
-        AsyncTask<String, Object, String> task = sshRemote.execute("amixer cset name='" + mixerName + "' " + value);
+
+        String cmd = "amixer cset name='" + mixerName + "' " + value;
+        runCommand(cmd);
+    }
+
+    private String runCommand(String cmd) throws IOException {
+        AsyncTask<String, Object, AsyncTaskResult<String>> sshRemote = new SshRemote(preferences);
+        AsyncTask<String, Object, AsyncTaskResult<String>> task = sshRemote.execute(cmd);
+        AsyncTaskResult<String> result = null;
         try {
-            task.get(3, TimeUnit.SECONDS);
+            result = task.get(3, TimeUnit.SECONDS);
         } catch (Exception e) {
             Log.e("AlsaMixer", e.getMessage(), e);
             throw new IOException(e.getMessage(), e);
 
         }
+        if (result.hasError()) {
+            Exception e = result.getError();
+            throw new IOException(e.getMessage(), e);
+        }
 
+        return result.getResult();
     }
 }

@@ -2,12 +2,14 @@ package fr.cyrilix.alsaremote.mixer;
 
 import java.io.IOException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import android.app.Activity;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.LinearLayout;
@@ -24,7 +26,7 @@ import fr.cyrilix.alsaremote.R;
  * 
  */
 public class MixerActivity extends Activity {
-
+    private static final Logger LOGGER = LoggerFactory.getLogger(MixerActivity.class);
     private AlsaMixer alsaMixer;
 
     private final SeekBar.OnSeekBarChangeListener onSeekBarChangeListener = new OnSeekBarChangeListener() {
@@ -34,12 +36,12 @@ public class MixerActivity extends Activity {
          */
         @Override
         public void onStopTrackingTouch(SeekBar seekBar) {
-            Log.d(INPUT_METHOD_SERVICE, "Modification du volume: " + seekBar.getProgress());
+            LOGGER.debug("Modification du volume: {}", seekBar.getProgress());
             TextView label = (TextView) ((LinearLayout) seekBar.getParent()).getChildAt(1);
             try {
                 alsaMixer.updateControle(label.getText().toString(), seekBar.getProgress());
             } catch (IOException e) {
-                Log.e("ControlActivity", e.getMessage(), e);
+                LOGGER.error(e.getMessage(), e);
                 AlertMessage alertMessage = new AlertMessage(getApplicationContext());
                 alertMessage.displayError(e);
 
@@ -99,8 +101,8 @@ public class MixerActivity extends Activity {
                 SeekBar seekBar = new SeekBar(this);
                 seekBar.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
                 seekBar.setOnSeekBarChangeListener(onSeekBarChangeListener);
-                seekBar.setProgress(Integer.valueOf(mixer.getValue()));
                 seekBar.setMax(Integer.parseInt(mixer.getMaxValue()));
+                seekBar.setProgress(Integer.valueOf(mixer.getValue()));
                 seekBar.setVisibility(View.VISIBLE);
                 seekBar.setContentDescription(mixer.getName());
                 mixerLayout.addView(seekBar);
@@ -110,9 +112,10 @@ public class MixerActivity extends Activity {
             }
             mixersLayout.refreshDrawableState();
 
+            mixersLayout.refreshDrawableState();
         } catch (IOException e) {
-            Log.e("ControlActivity", e.getMessage(), e);
-            AlertMessage alertMessage = new AlertMessage(getApplicationContext());
+            LOGGER.error(e.getMessage(), e);
+            AlertMessage alertMessage = new AlertMessage(this);
             alertMessage.displayError(e);
         }
     }

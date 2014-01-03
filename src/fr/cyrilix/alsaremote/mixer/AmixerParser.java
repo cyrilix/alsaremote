@@ -12,6 +12,7 @@ import java.util.regex.Pattern;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.slf4j.MarkerFactory;
 
 /**
  * Parser pour le résultat de la commande "amixer -i contents"
@@ -59,7 +60,7 @@ public class AmixerParser {
 
         List<MixerControl> mixerControls = new ArrayList<MixerControl>(entries.size());
         for (String entry : entries) {
-            LOGGER.debug("AmixerParser", "Parsing de la ligne: {}", entry);
+            LOGGER.debug("Parsing de la ligne: {}", entry);
             Matcher result = pattern.matcher(entry);
             if (!result.find()) continue;
 
@@ -76,7 +77,7 @@ public class AmixerParser {
                 mixerControls.add(new MixerControl(name, value, maxValue));
             }
         }
-        LOGGER.debug("AmixerParser", "Mixers: {}", mixerControls);
+        LOGGER.debug(MarkerFactory.getMarker("ALSA"), "Mixers: {}", mixerControls);
         return mixerControls;
     }
 }
