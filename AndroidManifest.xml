@@ -17,7 +17,7 @@
         android:label="@string/app_name"
         android:theme="@android:style/Theme.Holo" >
         <activity
-            android:name=".MainActivity"
+            android:name="fr.cyrilix.alsaremote.main.MainActivity"
             android:label="@string/title_activity_control" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,10 +28,10 @@
         <activity
             android:name="fr.cyrilix.alsaremote.mixer.MixerActivity"
             android:label="@string/sound_mixer"
-            android:parentActivityName=".MainActivity" >
+            android:parentActivityName="fr.cyrilix.alsaremote.main.MainActivity" >
         </activity>
         <activity
-            android:name=".SetPreferenceActivity"
+            android:name="fr.cyrilix.alsaremote.main.SetPreferenceActivity"
             android:label="@string/title_activity_control" >
         </activity>
     </application>

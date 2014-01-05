@@ -1,4 +1,4 @@
-package fr.cyrilix.alsaremote;
+package fr.cyrilix.alsaremote.main;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import fr.cyrilix.alsaremote.R;
 import fr.cyrilix.alsaremote.mixer.MixerActivity;
 
 /**

@@ -1,7 +1,8 @@
-package fr.cyrilix.alsaremote;
+package fr.cyrilix.alsaremote.tools;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import fr.cyrilix.alsaremote.R;
 
 /**
  * Class to display alert message

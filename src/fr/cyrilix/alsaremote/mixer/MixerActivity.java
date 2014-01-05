@@ -16,8 +16,8 @@ import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
-import fr.cyrilix.alsaremote.AlertMessage;
 import fr.cyrilix.alsaremote.R;
+import fr.cyrilix.alsaremote.tools.AlertMessage;
 
 /**
  * Activity that manage sound cursors

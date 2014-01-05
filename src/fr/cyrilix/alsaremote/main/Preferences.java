@@ -1,7 +1,8 @@
-package fr.cyrilix.alsaremote;
+package fr.cyrilix.alsaremote.main;
 
 import android.os.Bundle;
 import android.preference.PreferenceFragment;
+import fr.cyrilix.alsaremote.R;
 
 /**
  * @author Cyrille Nofficial

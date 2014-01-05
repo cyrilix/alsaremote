@@ -1,4 +1,4 @@
-package fr.cyrilix.alsaremote;
+package fr.cyrilix.alsaremote.main;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
