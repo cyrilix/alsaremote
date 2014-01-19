@@ -15,7 +15,7 @@ import org.slf4j.LoggerFactory;
 import org.slf4j.MarkerFactory;
 
 /**
- * Parser pour le résultat de la commande "amixer -i contents"
+ * Parser for command line result of "amixer -i contents"
  * 
  * @author Cyrille Nofficial
  * 
@@ -28,6 +28,14 @@ public class AmixerParser {
      */
     public AmixerParser() {}
 
+    /**
+     * Parse and convert alsa output result into {@link MixerControl}
+     * 
+     * @param response cmdline alsa output
+     * @return list of {@link MixerControl}
+     * 
+     * @throws IOException if response reading fail
+     */
     public List<MixerControl> parse(String response) throws IOException {
         if (response == null) return Collections.emptyList();
 
@@ -50,10 +58,6 @@ public class AmixerParser {
         return convertEntriesToMixerControl(entries);
     }
 
-    /**
-     * @param entries
-     * @return
-     */
     private List<MixerControl> convertEntriesToMixerControl(List<String> entries) {
         Pattern pattern = Pattern
                 .compile("numid=\\d+,iface=.*,name='(.+)' *; ?type=(.+),access=.*,values=(\\d*).*max=(\\d+).*: values=(\\d*).*");

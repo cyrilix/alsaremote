@@ -13,7 +13,7 @@ import fr.cyrilix.alsaremote.remote.SshRemote;
 import fr.cyrilix.alsaremote.tools.AsyncTaskResult;
 
 /**
- * Mixer alsa distant basé sur ssh
+ * Remote alsa mixer based on ssh
  * 
  * @author Cyrille Nofficial
  * 
@@ -26,7 +26,7 @@ public class AlsaMixerSshRemote implements AlsaMixer {
     /**
      * Constructor
      * 
-     * @param context
+     * @param context application context
      */
     public AlsaMixerSshRemote(Context context) {
         super();
@@ -65,7 +65,6 @@ public class AlsaMixerSshRemote implements AlsaMixer {
         } catch (Exception e) {
             Log.e("AlsaMixer", e.getMessage(), e);
             throw new IOException(e.getMessage(), e);
-
         }
         if (result.hasError()) {
             Exception e = result.getError();
